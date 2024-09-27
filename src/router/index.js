@@ -7,10 +7,12 @@ import Tracking from '../components/tracks/tracking.vue';
 import Home from '../components/Home.vue';
 import Users from '../components/Dashboard/users/UsersList.vue';
 import EditUser from '../components/Dashboard/users/EditUser.vue';
+import Activities from '../components/Dashboard/activities/ActivitiesList.vue';
+import DetailsActivity from '../components/Dashboard/activities/DetailsActivity.vue';
 
 const routes = [
   {
-    path: '',
+    path: '/',
     name: 'home',
     component: Home
   },
@@ -36,24 +38,36 @@ const routes = [
       {
         path: '', // Default route for the dashboard
         name: 'DashboardHome',
-        component: () => import('../components/Dashboard/Main.vue'), // Optional: add a home component for the dashboard
+        component: () => import('../components/Dashboard/Main.vue'),
       },
       {
         path: '/users', // Nested route for users
         name: 'Users',
         component: Users,
-      }, {
+      },
+      {
         path: '/edit-user/:id', // Route to edit user
         name: 'EditUser',
         component: EditUser,
       },
+      {
+        path: '/tracking',
+        name: 'Tracking',
+        component: Tracking
+      },
+      {
+        path: '/activities',
+        name: 'Activities',
+        component: Activities
+      },
+      {
+        path: '/detailsActivity/:id', // Nested route for activity details
+        name: 'DetailsActivity',
+        component: DetailsActivity,
+        props: (route) => ({ activityId: Number(route.params.id) }),
+      },
     ],
   },
-  {
-    path: '/tracking',
-    name: 'Tracking',
-    component: Tracking
-  }
 ];
 
 const router = createRouter({
