@@ -1,32 +1,42 @@
-// Example URL visit data
-const urlVisitData = {
-    user_id: '1', // Adjust according to your authentication logic
-    category_id: '1', // Adjust according to your categories
-    url: 'https://www.jenuel.dev/blog/Create-Chrome-Extension-Using-Vue-The-Easiest-Way',
-    visit_time: new Date().toISOString(),
-    duration: 120 // Example duration in seconds
-};
+chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
+    if (changeInfo.status === 'complete' && tab.url) {
+        console.log('Visited URL:', tab.url);
+        
+        // Ensure captureVisibleTab is called with the active tab
+        chrome.tabs.captureVisibleTab(tab.windowId, { format: 'png' }, (screenshotUrl) => {
+            if (chrome.runtime.lastError) {
+                console.error('Error capturing tab:', chrome.runtime.lastError.message);
+                return;
+            }
 
-fetch('http://localhost:8000/api/url-visits', {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + 'your-sanctum-token' // Ensure your token is valid
-    },
-    body: JSON.stringify(urlVisitData)
-})
-.then(response => {
-    if (!response.ok) {
-        // If the response is not OK, throw an error
-        return response.text().then(text => {
-            throw new Error(`HTTP error! status: ${response.status}, response: ${text}`);
+            console.log('Screenshot URL:', screenshotUrl);
+            
+            // Prepare the data to send to your API
+            const urlVisitData = {
+                url: tab.url,
+                screenshot: screenshotUrl,
+            };
+
+            // Send a POST request to your API
+            fetch('http://localhost:8000/api/url-visits', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(urlVisitData),
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Success:', data);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
         });
     }
-    return response.json(); // Parse JSON if response is OK
-})
-.then(data => {
-    console.log('URL visit saved:', data);
-})
-.catch(error => {
-    console.error('Error saving URL visit:', error);
 });

@@ -1,5 +1,5 @@
 <template>
-      <div class="absolute w-full bg-gray-800 dark:hidden min-h-75"></div>
+      <div class="all absolute w-full bg-gray-900 dark:hidden min-h-75"></div>
       <Leftsidebar />
       <main class="relative max-h-screen transition-all duration-200 ease-in-out xl:ml-68 rounded-xl ">
 
@@ -27,10 +27,12 @@
     },
    
    
-  };
+  }
   </script>
   
-  <style>
-  /* Your global styles */
-  </style>
+<style>
+.all{
+  /* background-color:#00416A; */
+}
+</style>
   

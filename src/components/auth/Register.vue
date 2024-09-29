@@ -49,8 +49,8 @@
 
           </div>
         <button 
-        class="whitespace-nowrap bg-blue-700 text-primary-foreground hover:bg-primary/90 mt-2 flex h-[unset] w-full items-center justify-center rounded-lg px-4 py-4 text-sm font-medium text-white"
-        type="submit">Register Now</button>
+        class="whitespace-nowrap bg-blue-700 text-primary-foreground hover:bg-primary/90 mt-2 flex h-[unset] w-full items-center justify-center rounded-lg px-4 py-4 text-bold font-medium text-white ml-14 W-full"
+        type="submit"> Sign up</button>
         </div>
       </form>
         <!-- Display error message if exists -->
@@ -106,9 +106,9 @@ export default {
 
         // Redirect based on role
         if (role === 'admin') {
-          this.$router.push('/dashboard');
+          this.$router.push('/login');
         } else {
-          this.$router.push('/dashboard');
+          this.$router.push('login');
         }
       } catch (error) {
         console.error('Registration error:', error.response ? error.response.data : error.message);
@@ -123,6 +123,7 @@ export default {
 .error-message {
   color: red;
   margin-top: 10px;
+  
 }
 section input{
   width: 150%;
@@ -132,6 +133,6 @@ form{
   margin-right: 40px;
 }
 .whitespace-nowrap{
-  background-color: rgb(28, 33, 53);
+  background-color: rgb(35, 63, 173);
 }
 </style>

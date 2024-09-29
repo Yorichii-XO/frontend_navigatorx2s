@@ -6,6 +6,13 @@
       </span>
     </div>
   </div>
+  <div class="p-4 bg-white w-5/6 rounded-lg pt-2 ml-6">
+    <div class="alert mx-4 bg-white" role="alert">
+      <span class="text-black">
+        <strong>Add, Edit, Delete you can use all functional!</strong>
+      </span>
+    </div>
+  </div>
   <div class="w-full px-6 py-6 mx-auto">
     <div class="flex flex-wrap -mx-3">
       <div class="flex-none w-full max-w-full px-3">
@@ -131,7 +138,7 @@ export default {
   },
   mounted() {
     this.fetchUsers();
-    this.fetchRoles();
+   
   },
   computed: {
     paginatedUsers() {
@@ -144,26 +151,34 @@ export default {
   },
   methods: {
     async fetchUsers() {
-      try {
-        const token = localStorage.getItem('authToken');
-        const response = await axios.get('http://localhost:8000/api/users', {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        this.users = response.data; // Ensure is_active is part of this response
-      } catch (error) {
-        console.error('Error fetching users:', error);
-      }
-    },
-    async fetchRoles() {
-      try {
-        const response = await axios.get('http://localhost:8000/api/roles');
-        this.roles = response.data;
-      } catch (error) {
-        console.error('Error fetching roles:', error);
-      }
-    },
+  try {
+    const token = localStorage.getItem('authToken');
+    const response = await axios.get('http://localhost:8000/api/users', {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    console.log('User data:', response.data); // Add this line for debugging
+
+    // Check if the response contains an array of users
+    if (Array.isArray(response.data)) {
+      this.users = response.data;
+    } else {
+      console.error('No users returned.');
+      this.users = []; // Clear the users array if no users are returned
+    }
+  } catch (error) {
+    if (error.response && error.response.status === 403) {
+      // Handle unauthorized error (super-admin access only)
+      console.error('Access denied. You are not authorized to view the users.');
+    } else {
+      // Handle other errors
+      console.error('Error fetching users:', error);
+    }
+  }
+}
+,
     getRoleName(roleId) {
       const role = this.roles.find(role => role.id === roleId);
       return role ? role.name : 'Unknown Role';

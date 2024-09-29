@@ -63,19 +63,23 @@
                                         </td>
                                         <td
                                             class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                            <p class="mb-0 text-xs font-semibold leading-tight">{{ activity.user ?
-                                                activity.user.name : 'Unknown User' }}</p>
+                                            <p class="mb-0 text-xs font-semibold leading-tight">
+        {{ activity.member_name || activity.user?.name || 'Unknown' }}
+    </p>
+
+
+
                                         </td>
                                         <td
                                             class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                                             <div class="relative inline-flex items-center">
-                                                <div :style="{ backgroundColor: getAvatarColor(activity.user.name) }"
-                                                class="inline-flex items-center justify-center  text-sm text-white transition-all duration-200 ease-in-out h-10 w-10 rounded-full">
-                                                    {{ activity.user ? activity.user.name.substring(0, 2).toUpperCase()
-                                                        : '?' }}
+                                                <div :style="{ backgroundColor: getAvatarColor(activity.member_name ) }"
+                                                    class="w-10 h-10 flex items-center justify-center text-white rounded-full">
+                                                    {{ activity.member_name.substring(0, 2).toUpperCase() || '?' }}
                                                 </div>
-                                                <span class="absolute bottom-0 right-0 w-3 h-3 rounded-full"
-                                                    :class="activity.user && activity.user.is_active === 'active' ? 'bg-green-500' : 'bg-red-500'"></span>
+
+                                              
+
                                             </div>
                                         </td>
                                         <td
@@ -100,7 +104,7 @@
                                                 class="text-blue-500 hover:text-blue-700">
                                                 <i class="fas fa-eye"></i> <!-- View Details Icon -->
                                             </router-link>
-                                
+
                                             <button @click="confirmDeleteActivity(activity.id)"
                                                 class="text-red-500 hover:text-red-700 ml-2">
                                                 <i class="fas fa-trash-alt"></i> <!-- Delete Icon -->
@@ -148,11 +152,12 @@
         </div>
     </div>
 </template>
-
 <script>
 import Swal from 'sweetalert2';
+import { watch } from 'vue';
 
 export default {
+    name: "ActivityList",
     data() {
         return {
             activities: [], // All activities
@@ -251,34 +256,34 @@ export default {
             });
         },
         deleteActivity(activityId) {
-  const authToken = localStorage.getItem('authToken');
-  fetch(`http://localhost:8000/api/activities/${activityId}`, {
-    method: 'DELETE',
-    headers: {
-      'Authorization': `Bearer ${authToken}`,
-      'Content-Type': 'application/json',
-    },
-  })
-  .then(response => {
-    if (response.ok) {
-      this.activities = this.activities.filter(activity => activity.id !== activityId);
-      this.filteredActivities = this.filteredActivities.filter(activity => activity.id !== activityId);
-      console.log('Activity deleted:', activityId);
-      // Show success message with SweetAlert
-      Swal.fire({
-        title: 'Deleted!',
-        text: 'Activity has been deleted.',
-        icon: 'success',
-        confirmButtonColor: '#28a745', // Green color for the OK button
-        confirmButtonText: 'OK'
-      });
-    } else {
-      console.error('Error deleting activity:', response.status);
-    }
-  })
-  .catch(error => console.error('Error deleting activity:', error));
-}
-,
+            const authToken = localStorage.getItem('authToken');
+            fetch(`http://localhost:8000/api/activities/${activityId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${authToken}`,
+                    'Content-Type': 'application/json',
+                },
+            })
+                .then(response => {
+                    if (response.ok) {
+                        this.activities = this.activities.filter(activity => activity.id !== activityId);
+                        this.filteredActivities = this.filteredActivities.filter(activity => activity.id !== activityId);
+                        console.log('Activity deleted:', activityId);
+                        // Show success message with SweetAlert
+                        Swal.fire({
+                            title: 'Deleted!',
+                            text: 'Activity has been deleted.',
+                            icon: 'success',
+                            confirmButtonColor: '#28a745', // Green color for the OK button
+                            confirmButtonText: 'OK'
+                        });
+                    } else {
+                        console.error('Error deleting activity:', response.status);
+                    }
+                })
+                .catch(error => console.error('Error deleting activity:', error));
+        }
+        ,
         nextPage() {
             if (this.currentPage < this.totalPages) {
                 this.currentPage++;
@@ -288,8 +293,22 @@ export default {
             if (this.currentPage > 1) {
                 this.currentPage--;
             }
-        }
+        },
+        watch: {
+        filteredActivities(newVal) {
+            if (Array.isArray(newVal)) {
+                this.updatePaginatedActivities();
+            } else {
+                console.error('filteredActivities is not an array:', newVal);
+            }
+        },
+        currentPage() {
+            this.updatePaginatedActivities();
+        },
     },
+    mounted() {
+        this.fetchActivities();
+    }}
 };
 </script>
 

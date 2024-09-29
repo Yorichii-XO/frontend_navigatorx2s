@@ -122,20 +122,50 @@ export default {
   },
   methods: {
     async startActivity() {
-      try {
-        const response = await axios.post('/activities/start', null, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('authToken')}`,
-          },
-        });
-        this.currentActivity = response.data;
-        this.isActive = true;
-        this.elapsedTime = 0;
-        this.startElapsedTime();
-      } catch (error) {
-        console.error('Error starting activity:', error);
-      }
-    },
+  try {
+    // Check if the user is a member
+    const isMember = await this.checkIfUserIsMember();
+
+    let memberId = null;
+    if (isMember) {
+      // Get the member ID (this could be from local storage, a state management store, etc.)
+      memberId = localStorage.getItem('memberId'); // Ensure this is set when the user logs in as a member
+    }
+
+    // Send the start activity request
+    const response = await axios.post('/activities/start', {
+      member_id: memberId, // Include member_id if exists
+    }, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('authToken')}`,
+      },
+    });
+
+    this.currentActivity = response.data;
+    this.isActive = true;
+    this.elapsedTime = 0;
+    this.startElapsedTime();
+  } catch (error) {
+    console.error('Error starting activity:', error);
+  }
+},
+
+// Helper method to check if the user is a member
+async checkIfUserIsMember() {
+  try {
+    // Replace with your logic to determine if the user is a member
+    const response = await axios.get('/members/check', {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('authToken')}`,
+      },
+    });
+    return response.data.isMember; // Adjust based on your API response structure
+  } catch (error) {
+    console.error('Error checking member status:', error);
+    return false; // Default to not a member in case of error
+  }
+},
+
     async stopActivity() {
       try {
         await axios.put(`/activities/stop/${this.currentActivity.id}`, null, {

@@ -7,41 +7,8 @@
         </button>
     </div>
     <div class="flex">
-        <div class="font-sans p-4">
-    <ul class="flex gap-2 w-max bg-white p-1 rounded-full shadow-[0_2px_8px_-1px_rgba(6,81,237,0.4)]">
-        <li id="homeTab"
-            class="tab text-white font-bold text-center text-sm bg-blue-600 py-3 px-6 rounded-full tracking-wide cursor-pointer">
-            Home
-        </li>
-        <li id="settingTab"
-            class="tab text-gray-500 font-bold text-center text-sm py-3 px-6 rounded-full tracking-wide cursor-pointer">
-            Settings
-        </li>
-        <li id="profileTab"
-            class="tab text-gray-500 font-bold text-center text-sm py-3 px-6 rounded-full tracking-wide cursor-pointer">
-            Profile
-        </li>
-    </ul>
-
-    <div id="homeContent" class="tab-content max-w-2xl block mt-8">
-        <h4 class="text-lg font-bold text-gray-600">Home</h4>
-        <p class="text-sm text-gray-600 mt-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Sed auctor auctor arcu, at fermentum dui.
-        </p>
-    </div>
-    <div id="settingContent" class="tab-content max-w-2xl hidden mt-8">
-        <h4 class="text-lg font-bold text-gray-600">Setting</h4>
-        <p class="text-sm text-gray-600 mt-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Sed auctor auctor arcu.
-        </p>
-    </div>
-    <div id="profileContent" class="tab-content max-w-2xl hidden mt-8">
-        <h4 class="text-lg font-bold text-gray-600">Profile</h4>
-        <p class="text-sm text-gray-600 mt-4">Lorem ipsum dolor sit amet, consectetur.
-        </p>
-    </div>
-</div>
-    <div class="statistique-container flex items-start relative font-[sans-serif]">
+        
+    <div class="statistique-container flex items-start relative font-[sans-serif] ">
         <!-- Button beside and slightly above the card -->
 
 

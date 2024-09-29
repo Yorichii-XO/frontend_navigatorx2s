@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tracked URLs</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <h1>Tracked URLs</h1>
+    <ul id="urlList"></ul>
+
+    <script>
+   
+
+
+        // Fetch and display tracked URLs
+        if (typeof chrome !== 'undefined' && chrome.storage && chrome.storage.local) {
+           // Save data
+chrome.storage.local.set({ key: 'value' }, function() {
+  console.log('Value is set to ' + value);
+});
+
+// Retrieve data
+chrome.storage.local.get(['key'], function(result) {
+  console.log('Value currently is ' + result.key);
+});
+        } else {
+            console.error('chrome.storage.local is not available. Make sure you are in a Chrome extension context.');
+        }
+    </script>
+</body>
+</html>

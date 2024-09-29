@@ -1,8 +1,11 @@
 <template>
   <nav
-    class="relative flex flex-wrap items-center justify-between px-0 py-2 mx-6 transition-all ease-in shadow-none duration-250  rounded-2xl lg:flex-nowrap lg:justify-start"
-    navbar-main navbar-scroll="false">
+    class="relative flex flex-wrap items-center justify-between px-0 py-2 mx-6 transition-all ease-in shadow-none duration-250 rounded-2xl lg:flex-nowrap lg:justify-start"
+    navbar-main navbar-scroll="false"
+  >
     <div class="flex items-center justify-between w-full px-4 py-1 mx-auto flex-wrap-inherit">
+      <nav>
+        <div class="flex items-center justify-between w-full px-4 py-1 mx-auto flex-wrap-inherit">
       <nav>
         <div class="getting-started-hint bg-white rounded-lg w-[60%] " data-getting-started-step="track_time"
           data-gs-content="Track time to your projects and tasks"
@@ -24,174 +27,241 @@
               </svg> </a>
           </div>
 
-        </div>
-
+        </div></nav></div>
       </nav>
-      <p class="ml-2 mt-4 text-sm text-gray-400 font-mideum">Activity Monitoring and Time Tracking System. </p>
+      <p class="ml-2 mt-4 text-sm text-gray-400 font-medium">Activity Monitoring and Time Tracking System.</p>
 
       <div class="flex items-center mt-2 grow sm:mt-0 sm:mr-6 md:mr-0 lg:flex lg:basis-auto">
-        <div class="flex items-center md:ml-auto md:pr-4">
+        <div class="flex items-center md:ml-auto md:pr-4"></div>
+        <ul class="flex flex-row justify-end mb-0 list-none md-max:w-full  space-x-4">
+          <li class="flex items-center">
+            <a
+              href="#"
+              @click.prevent="logout"
+              class="block px-0 py-2 text-sm font-semibold text-white transition-all ease-nav-brand"
+            >
+            <i class="fa fa-user sm:mr-1"></i>
+              <span class="ml-1">Logout</span>
+            </a>
+          </li>
+          <li class="relative flex items-center pr-2 w-auto">
+  <p class="hidden transform-dropdown-show"></p>
 
-        </div>
-        <ul class="flex flex-row justify-end pl-0 mb-0 list-none md-max:w-full">
-          <!-- online builder btn  -->
-          <!-- <li class="flex items-center">
-                <a class="inline-block px-8 py-2 mb-0 mr-4 text-xs font-bold text-center text-blue-500 uppercase align-middle transition-all ease-in bg-transparent border border-blue-500 border-solid rounded-lg shadow-none cursor-pointer leading-pro hover:-translate-y-px active:shadow-xs hover:border-blue-500 active:bg-blue-500 active:hover:text-blue-500 hover:text-blue-500 tracking-tight-rem hover:bg-transparent hover:opacity-75 hover:shadow-none active:text-white active:hover:bg-transparent" target="_blank" href="https://www.creative-tim.com/builder/soft-ui?ref=navbar-dashboard&amp;_ga=2.76518741.1192788655.1647724933-1242940210.1644448053">Online Builder</a>
-              </li> -->
-              <li class="flex items-center">
-      <a href="#" @click.prevent="logout"
-         class="block px-0 py-2 text-sm font-semibold text-white transition-all ease-nav-brand">
-        <svg viewBox="0 0 32 32" fill="white" width="25px" xmlns="http://www.w3.org/2000/svg">
-          <!-- SVG content -->
-        </svg>
-        <span class="hidden sm:inline">Logout</span>
-      </a>
-    </li>
-          <li class="flex items-center pl-4 xl:hidden">
-            <a href="javascript:;" class="block p-0 text-sm text-white transition-all ease-nav-brand" sidenav-trigger>
-              <div class="w-4.5 overflow-hidden">
-                <i class="ease mb-0.75 relative block h-0.5 rounded-sm bg-white transition-all"></i>
-                <i class="ease mb-0.75 relative block h-0.5 rounded-sm bg-white transition-all"></i>
-                <i class="ease relative block h-0.5 rounded-sm bg-white transition-all"></i>
+  <a
+    href="#"
+    @click.prevent="toggleDropdown"
+    class="block p-0 w-auto text-sm text-white transition-all ease-nav-brand"
+    dropdown-trigger aria-expanded="false"
+  >
+    <div class="relative">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="w-6 cursor-pointer text-white"
+        fill="white"
+        viewBox="0 0 371.263 371.263"
+      >
+        <path
+          d="M305.402 234.794v-70.54c0-52.396-33.533-98.085-79.702-115.151.539-2.695.838-5.449.838-8.204C226.539 18.324 208.215 0 185.64 0s-40.899 18.324-40.899 40.899c0 2.695.299 5.389.778 7.964-15.868 5.629-30.539 14.551-43.054 26.647-23.593 22.755-36.587 53.354-36.587 86.169v73.115c0 2.575-2.096 4.731-4.731 4.731-22.096 0-40.959 16.647-42.995 37.845-1.138 11.797 2.755 23.533 10.719 32.276 7.904 8.683 19.222 13.713 31.018 13.713h72.217c2.994 26.887 25.869 47.905 53.534 47.905s50.54-21.018 53.534-47.905h72.217c11.797 0 23.114-5.03 31.018-13.713 7.904-8.743 11.797-20.479 10.719-32.276-2.036-21.198-20.958-37.845-42.995-37.845a4.704 4.704 0 0 1-4.731-4.731zM185.64 23.952c9.341 0 16.946 7.605 16.946 16.946 0 .778-.12 1.497-.24 2.275-4.072-.599-8.204-1.018-12.336-1.138-7.126-.24-14.132.24-21.078 1.198-.12-.778-.24-1.497-.24-2.275.002-9.401 7.607-17.006 16.948-17.006zm0 323.358c-14.431 0-26.527-10.3-29.342-23.952h58.683c-2.813 13.653-14.909 23.952-29.341 23.952zm143.655-67.665c.479 5.15-1.138 10.12-4.551 13.892-3.533 3.773-8.204 5.868-13.353 5.868H59.89c-5.15 0-9.82-2.096-13.294-5.868-3.473-3.772-5.09-8.743-4.611-13.892.838-9.042 9.282-16.168 19.162-16.168 15.809 0 28.683-12.874 28.683-28.683v-73.115c0-26.228 10.419-50.719 29.282-68.923 18.024-17.425 41.498-26.887 66.528-26.887 1.198 0 2.335 0 3.533.06 50.839 1.796 92.277 45.929 92.277 98.325v70.54c0 15.809 12.874 28.683 28.683 28.683 9.88 0 18.264 7.126 19.162 16.168z"
+        />
+      </svg>
+      <span
+        class="bg-red-500 text-[10px] px-1.5 font-semibold min-w-[16px] h-4 flex items-center justify-center text-white rounded-full absolute -top-2 left-[60%]"
+      >
+        {{ invitations.length }} <!-- Display the number of invitations -->
+      </span>
+    </div>
+  </a>
+  
+  <div v-if="dropdownOpen" class="absolute right-0 z-10 w-auto h-auto bg-white rounded-md shadow-lg mt-60">
+    <div class="py-2">
+      <div v-if="invitations.length === 0" dropdown-menu class="text-sm w-auto 
+          before:font-awesome before:leading-default before:duration-350 
+          before:ease lg:shadow-3xl duration-250 min-w-44 
+          before:sm:right-8 before:text-5.5 pointer-events-none 
+          absolute right-0 top-0 z-50 origin-top list-none 
+          rounded-lg border-0 border-solid border-transparent dark:shadow-dark-xl 
+          dark:bg-slate-850 bg-white bg-clip-padding px-2 py-4 text-left 
+          text-slate-500 opacity-0 transition-all 
+          before:absolute before:right-2 before:left-auto 
+          before:top-0 before:z-50 before:inline-block 
+          before:font-normal before:text-white before:antialiased 
+          before:transition-all before:content-['\f0d8']
+          sm:-mr-6 lg:absolute lg:right-0 lg:left-auto lg:mt-2 lg:block lg:cursor-pointer">
+        No new notifications
+      </div>
+      <template v-else>
+        <div class="relative mb-2">
+          <div
+            v-for="invitation in invitations"
+            :key="invitation.id"
+            class="dark:hover:bg-slate-900 ease py-1.2 clear-both block w-auto whitespace-nowrap rounded-lg bg-transparent px-4 duration-300 hover:bg-gray-200 hover:text-slate-700 lg:transition-colors"
+          >
+            <div class="flex py-1 w-auto">
+              <div class="my-auto flex items-center justify-center rounded-xl h-9 w-9 max-w-none bg-blue-500 text-white font-bold mr-2">
+                {{ invitation.invited_by.charAt(0).toUpperCase() }} <!-- Avatar with first letter -->
               </div>
-            </a>
-          </li>
+              <div class="flex flex-col justify-center">
+                <h6 class="mb-1 text-sm font-normal leading-normal dark:text-white">
+                  <span class="font-semibold">New message</span>
+                  {{ invitation.invited_by }}
+                </h6>
+                <p class="mb-0 text-xs leading-tight text-slate-400 dark:text-white/80">
+                  <i class="mr-1 fa fa-clock"></i>
+                  {{ invitation.created_at }}
+                </p>
+              </div>
+            </div>
+            <span>
+              <p class="text-sm">You have been invited to join!</p>
+            </span>
+            <div class="flex items-center">
+              <button @click="acceptInvitation(invitation.id)" class="text-blue-600">Accept</button>
+              <button @click="declineInvitation(invitation.id)" class="text-red-600 ml-2">Decline</button>
+              <button @click="deleteNotification(invitation.id)" class="ml-2 text-red-600">
+                <svg viewBox="0 0 24 24" fill="red" width="16px">
+                  <path d="M3 6h18v2H3zm3 2h12v12H6z" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </template>
+    </div>
+  </div>
+</li>
 
-          <li class="flex items-center px-4">
-            <a href="javascript:;" class="p-0 text-sm text-white transition-all ease-nav-brand">
-              <i fixed-plugin-button-nav class="cursor-pointer fa fa-cog"></i>
-              <!-- fixed-plugin-button-nav  -->
-            </a>
-          </li>
 
-          <!-- notifications -->
-
-          <li class="relative flex items-center pr-2">
-            <p class="hidden transform-dropdown-show"></p>
-            <a href="javascript:;" class="block p-0 text-sm text-white transition-all ease-nav-brand" dropdown-trigger
-              aria-expanded="false">
-              <i class="cursor-pointer fa fa-bell"></i>
-            </a>
-
-            <ul dropdown-menu
-              class="text-sm transform-dropdown before:font-awesome before:leading-default dark:shadow-dark-xl before:duration-350 before:ease lg:shadow-3xl duration-250 min-w-44 before:sm:right-8 before:text-5.5 pointer-events-none absolute right-0 top-0 z-50 origin-top list-none rounded-lg border-0 border-solid border-transparent dark:bg-slate-850 bg-white bg-clip-padding px-2 py-4 text-left text-slate-500 opacity-0 transition-all before:absolute before:right-2 before:left-auto before:top-0 before:z-50 before:inline-block before:font-normal before:text-white before:antialiased before:transition-all before:content-['\f0d8'] sm:-mr-6 lg:absolute lg:right-0 lg:left-auto lg:mt-2 lg:block lg:cursor-pointer">
-              <!-- add show class on dropdown open js -->
-              <li class="relative mb-2">
-                <a class="dark:hover:bg-slate-900 ease py-1.2 clear-both block w-full whitespace-nowrap rounded-lg bg-transparent px-4 duration-300 hover:bg-gray-200 hover:text-slate-700 lg:transition-colors"
-                  href="javascript:;">
-                  <div class="flex py-1">
-                    <div class="my-auto">
-                      <img src="/assets/img/team-2.jpg"
-                        class="inline-flex items-center justify-center mr-4 text-sm text-white h-9 w-9 max-w-none rounded-xl" />
-                    </div>
-                    <div class="flex flex-col justify-center">
-                      <h6 class="mb-1 text-sm font-normal leading-normal dark:text-white"><span
-                          class="font-semibold">New message</span> from Laur</h6>
-                      <p class="mb-0 text-xs leading-tight text-slate-400 dark:text-white/80">
-                        <i class="mr-1 fa fa-clock"></i>
-                        13 minutes ago
-                      </p>
-                    </div>
-                  </div>
-                </a>
-              </li>
-
-              <li class="relative mb-2">
-                <a class="dark:hover:bg-slate-900 ease py-1.2 clear-both block w-full whitespace-nowrap rounded-lg px-4 transition-colors duration-300 hover:bg-gray-200 hover:text-slate-700"
-                  href="javascript:;">
-                  <div class="flex py-1">
-                    <div class="my-auto">
-                      <img src="/assets/img/small-logos/logo-spotify.svg"
-                        class="inline-flex items-center justify-center mr-4 text-sm text-white bg-gradient-to-tl from-zinc-800 to-zinc-700 dark:bg-gradient-to-tl dark:from-slate-750 dark:to-gray-850 h-9 w-9 max-w-none rounded-xl" />
-                    </div>
-                    <div class="flex flex-col justify-center">
-                      <h6 class="mb-1 text-sm font-normal leading-normal dark:text-white"><span
-                          class="font-semibold">New album</span> by Travis Scott</h6>
-                      <p class="mb-0 text-xs leading-tight text-slate-400 dark:text-white/80">
-                        <i class="mr-1 fa fa-clock"></i>
-                        1 day
-                      </p>
-                    </div>
-                  </div>
-                </a>
-              </li>
-
-              <li class="relative">
-                <a class="dark:hover:bg-slate-900 ease py-1.2 clear-both block w-full whitespace-nowrap rounded-lg px-4 transition-colors duration-300 hover:bg-gray-200 hover:text-slate-700"
-                  href="javascript:;">
-                  <div class="flex py-1">
-                    <div
-                      class="inline-flex items-center justify-center my-auto mr-4 text-sm text-white transition-all duration-200 ease-nav-brand bg-gradient-to-tl from-slate-600 to-slate-300 h-9 w-9 rounded-xl">
-                      <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1"
-                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                        <title>credit-card</title>
-                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                          <g transform="translate(-2169.000000, -745.000000)" fill="#FFFFFF" fill-rule="nonzero">
-                            <g transform="translate(1716.000000, 291.000000)">
-                              <g transform="translate(453.000000, 454.000000)">
-                                <path class="color-background"
-                                  d="M43,10.7482083 L43,3.58333333 C43,1.60354167 41.3964583,0 39.4166667,0 L3.58333333,0 C1.60354167,0 0,1.60354167 0,3.58333333 L0,10.7482083 L43,10.7482083 Z"
-                                  opacity="0.593633743"></path>
-                                <path class="color-background"
-                                  d="M0,16.125 L0,32.25 C0,34.2297917 1.60354167,35.8333333 3.58333333,35.8333333 L39.4166667,35.8333333 C41.3964583,35.8333333 43,34.2297917 43,32.25 L43,16.125 L0,16.125 Z M19.7083333,26.875 L7.16666667,26.875 L7.16666667,23.2916667 L19.7083333,23.2916667 L19.7083333,26.875 Z M35.8333333,26.875 L28.6666667,26.875 L28.6666667,23.2916667 L35.8333333,23.2916667 L35.8333333,26.875 Z">
-                                </path>
-                              </g>
-                            </g>
-                          </g>
-                        </g>
-                      </svg>
-                    </div>
-                    <div class="flex flex-col justify-center">
-                      <h6 class="mb-1 text-sm font-normal leading-normal dark:text-white">Payment successfully completed
-                      </h6>
-                      <p class="mb-0 text-xs leading-tight text-slate-400 dark:text-white/80">
-                        <i class="mr-1 fa fa-clock"></i>
-                        2 days
-                      </p>
-                    </div>
-                  </div>
-                </a>
-              </li>
-            </ul>
-          </li>
         </ul>
       </div>
     </div>
-
   </nav>
- 
 </template>
+
 <script>
+import axios from 'axios';
+
 export default {
+  data() {
+    return {
+      dropdownOpen: false,
+      invitations: [], // This should be populated with your invitations
+    };
+  },
   methods: {
-    async logout() {
+    toggleDropdown() {
+      this.dropdownOpen = !this.dropdownOpen;
+      if (this.dropdownOpen) {
+        this.fetchInvitations();
+      }
+    },
+    async fetchInvitations() {
       try {
-        const response = await fetch('http://localhost:8000/api/logout', {
-          method: 'POST',
+        const token = localStorage.getItem('authToken'); // Retrieve token from local storage
+        const response = await fetch('/api/invitations', {
           headers: {
-            'Authorization': `Bearer ${localStorage.getItem('authToken')}`, // Use the correct key for your auth token
+            'Authorization': `Bearer ${token}`, // Include the token in the Authorization header
             'Content-Type': 'application/json',
           },
         });
-
         if (!response.ok) {
-          throw new Error('Logout failed');
+          throw new Error('Network response was not ok');
         }
-
-        // Clear the auth token
-        localStorage.removeItem('authToken');
-
-        // Redirect to login page
-        this.$router.push('/login');
+        const data = await response.json();
+        this.invitations = data;
       } catch (error) {
-        console.error('Logout error:', error);
-        // Handle error (e.g., show a notification)
+        console.error('Error fetching invitations:', error);
       }
     },
+    acceptInvitation(id) {
+  if (!id) {
+    console.error("Invitation ID is undefined.");
+    return; // Exit if ID is undefined
+  }
+
+  const authToken = localStorage.getItem('authToken'); // Adjust to your token storage method
+  const headers = {
+    'Authorization': `Bearer ${authToken}`,
+    'Content-Type': 'application/json'
+  };
+
+  // Example data to send in the request body
+  const data = {
+    role_id: 1, // Example role ID, adjust as necessary
+    is_active: true // Assuming this needs to be sent
+  };
+
+  axios.post(`/invitations/${id}/accept`, data, { headers })
+    .then((response) => {
+      console.log(`Accepted invitation with ID: ${id}`);
+      console.log(response.data.message); // Show success message
+      // Optionally handle state updates or UI changes
+    })
+    .catch((error) => {
+      if (error.response) {
+        console.error("Error accepting invitation:", error.response.data); // Inspect the validation errors
+      } else {
+        console.error("Error accepting invitation:", error);
+      }
+    })},
+  declineInvitation(id) {
+    if (!id) {
+      console.error("Invitation ID is undefined.");
+      return; // Exit if ID is undefined
+    }
+
+    // Logic to decline an invitation
+    this.$http
+      .post(`/api/invitations/${id}/decline`)
+      .then((response) => {
+        console.log(`Declined invitation with ID: ${id}`);
+        // Optionally remove the invitation from the list
+        this.invitations = this.invitations.filter(inv => inv.id !== id);
+      })
+      .catch((error) => {
+        console.error("Error declining invitation:", error);
+      });
+  },
+    async deleteNotification(id) {
+      try {
+        const token = localStorage.getItem('authToken'); // Retrieve token from local storage
+        await fetch(`/invitations/${id}/delete`, {
+          method: 'DELETE',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        });
+        // Remove invitation from the list after deleting
+        this.invitations = this.invitations.filter(invitation => invitation.id !== id);
+      } catch (error) {
+        console.error('Error deleting notification:', error);
+      }
+    },
+    logout() {
+    axios.post('/logout', {}, {
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem('authToken')}`
+        }
+    })
+    .then(() => {
+        // Remove the token from local storage
+        localStorage.removeItem('authToken');
+        // Redirect to the login page
+        this.$router.push('/login');
+    })
+    .catch(error => {
+        if (error.response) {
+            console.error('Logout error:', error.response.data);
+        } else {
+            console.error('Logout error:', error.message);
+        }
+    });
+}
+
   },
 };
 </script>
 
 <style scoped>
-/* No additional styles needed, Tailwind CSS is applied */
+/* Add any additional styles here */
 </style>

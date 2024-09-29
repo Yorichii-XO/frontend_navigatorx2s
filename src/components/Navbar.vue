@@ -1,7 +1,7 @@
 <template>
   <header
-     :class="navbarBgColor"
-    class="fixed inset-x-0 top-0 z-30 mx-auto w-full max-w-screen-md border border-gray-100 py-3 shadow backdrop-blur-lg md:top-6 md:rounded-3xl lg:max-w-screen-lg transition-all duration-300 mt-10"
+   
+    class=" bg-white fixed inset-x-0 top-0 z-30 mx-auto w-full max-w-screen-md border border-blue-600 py-3 shadow backdrop-blur-lg md:top-6 md:rounded-3xl lg:max-w-screen-lg transition-all duration-300 mt-10"
   >
     <div class="px-4">
       <div class="flex items-center justify-between">
@@ -19,19 +19,19 @@
           <router-link
             to="/"
             class="inline-block rounded-lg px-2 py-1 text-sm font-bold text-balack transition-all duration-200 hover:bg-gray-100 hover:text-gray-900"
-           
+            @click.prevent="scrollTo('home')"
             >
             Home
           </router-link>
           <a
             class="inline-block rounded-lg px-2 py-1 text-sm font-bold text-black cursor-pointer transition-all duration-200 hover:bg-gray-100 hover:text-gray-900"
-            @click.prevent="$router.push('#how-it-works')"
+             @click.prevent="scrollTo('video')"
           >
             How it works
           </a>
           <a
             class="inline-block rounded-lg px-2 py-1 text-sm font-bold text-black cursor-pointer transition-all duration-200 hover:bg-gray-100 hover:text-gray-900"
-            @click.prevent="scrollTo('features', 'bg-gray-900')"
+            @click.prevent="scrollTo('features')"
           >
             Features
           </a>
@@ -55,7 +55,7 @@
             v-if="!isLoggedIn"
             to="/register"
             class="inline-block rounded-lg px-2 py-1 text-sm font-medium text-white transition-all duration-200 hover:text-gray-900"
-          @click.prevent="scrollTo('log', 'bg-gray-900')"
+          @click.prevent="scrollTo('log')"
             >
             <a
               class="inline-flex items-center justify-center rounded-xl bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm transition-all duration-150"
@@ -77,7 +77,7 @@ export default {
   data() {
     return {
       isLoggedIn: false, // Initial state
-      navbarBgColor: "bg-white", // Default navbar background color
+    
     };
   },
   mounted() {
@@ -85,16 +85,13 @@ export default {
     this.isLoggedIn = !!localStorage.getItem("token");
   },
   methods: {
-    scrollTo(sectionId, bgColor) {
+    scrollTo(sectionId) {
       const section = document.getElementById(sectionId);
       if (section) {
         section.scrollIntoView({ behavior: "smooth" });
-        this.changeNavbarColor(bgColor); // Change navbar color
       }
     },
-    changeNavbarColor(color) {
-      this.navbarBgColor = color; // Set the background color to the custom color
-    },
+    
     logout() {
       localStorage.removeItem("token");
       this.isLoggedIn = false;
